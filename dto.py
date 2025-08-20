@@ -30,6 +30,7 @@ class VideoContent:
   questions: list[str]
   answers: list[str]
   topics: list[str]
+  id: int|None = None
 
   def __str__(self):
     comments_str = '\n    '.join([f"- {comment.text} ({comment.rating.value})" for comment in self.comments])
@@ -39,6 +40,7 @@ class VideoContent:
     
     return f"""
       VideoContent:
+        ID: {self.id}
         Title: {self.metadata.title}
         Authors: {', '.join(self.metadata.authors)}
         
@@ -55,4 +57,30 @@ class VideoContent:
         
         Comments:
           {comments_str}
+      """
+  
+
+@dataclass
+class SubcontentType(Enum):
+  SUMMARY = "summary"
+  QUESTION = "question"
+  ANSWER = "answer"
+  TOPIC = "topic"
+  COMMENTS = "comments"
+
+
+@dataclass
+class Error:
+  message: str
+  title: str
+  module: str
+  id: int|None = None
+
+  def __str__(self):
+    return f"""
+      Error:
+        ID: {self.id}
+        Message: {self.message}
+        Title: {self.title}
+        Module: {self.module}
       """

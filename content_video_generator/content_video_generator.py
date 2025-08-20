@@ -1,4 +1,4 @@
-from dto import VideoContent, VideoMetadata, VideoComment, VideoCommentRating
+from dto import VideoContent, VideoMetadata, VideoComment, VideoCommentRating, SubcontentType
 from content_video_generator.subtitle_extractor import SubtitleExtractor
 from ia import GeminiService
 
@@ -11,6 +11,21 @@ class ContentVideoGenerator:
 
   def __init__(self):
     self.gemini_service = GeminiService()
+   
+  """
+  Objetivo: Generar subcontenido del video
+  Solo va a cambiar cuando la lógica de generación de subcontenido cambie
+  """
+  def generate_subcontent(self, content_video:VideoContent, subcontent_type:SubcontentType):    
+    methods = {
+        SubcontentType.SUMMARY.value: lambda: setattr(content_video, 'summary', self.get_summary(content_video.text, perspective="una prediccion economica")),
+        SubcontentType.QUESTION.value: lambda: setattr(content_video, 'questions', self.get_questions(content_video.text, perspective="investigacion")),
+        SubcontentType.ANSWER.value: lambda: setattr(content_video, 'answers', self.get_answers(content_video.questions)),
+        SubcontentType.TOPIC.value: lambda: setattr(content_video, 'topics', self.get_topics(content_video.text, perspective="investigacion")),
+        SubcontentType.COMMENTS.value: lambda: setattr(content_video, 'comments', self._get_comments(content_video.text, perspective="economico"))
+    }
+    methods[subcontent_type.value]()
+    return content_video
 
   """
   Objetivo: Generar contenido de video
@@ -30,7 +45,6 @@ class ContentVideoGenerator:
       answers=[],
       topics=[]
     )
-  
 
   """
   Objetivo: Obtener subtitulos del video
@@ -102,6 +116,84 @@ class ContentVideoGenerator:
     ) 
     for comment in response]
     return video_comments
+  
+  """
+  Objetivo: Generar resumen del video
+  Solo va a cambiar cuando la lógica de generación de resumen cambie
+  """
+  def get_summary(self, subtitles:str, perspective:str) -> str:
+    prompt = f"""
+    Genera un resumen del video utilizando los subtitulos que te voy a pasar
+    El resumen debe ser de 100 palabras maximo
+    El resumen debe ser en español
+    El resumen debe estar en html
+    Debe tener un enfoque de {perspective}
+    Subtitulos: {subtitles}
+    """
+    response = self._send_prompt(prompt, is_json=False)
+    return response
+  
+  """
+  Objetivo: Generar preguntas del video
+  Solo va a cambiar cuando la lógica de generación de preguntas cambie
+  """
+  def get_questions(self, subtitles:str, perspective:str) -> list[str]:
+    json_format = """ 
+    [{
+      "question": "pregunta del video"
+    }]
+    """
+    prompt = f"""
+    Genera 10 preguntas del video utilizando los subtitulos que te voy a pasar
+    Con un enfoque de {perspective}
+    El formato debe seguir el formato:
+    {json_format}
+    Subtitulos: {subtitles}
+    """
+    response = self._send_prompt(prompt, is_json=True)
+    questions = [item["question"] for item in response]
+    return questions
+  
+  """
+  Objetivo: Generar respuestas del video
+  Solo va a cambiar cuando la lógica de generación de respuestas cambie
+  """
+  def get_answers(self, questions:list[str]) -> list[str]:
+    json_format = """
+    [{
+      "answer": "respuesta a la pregunta"
+    }]
+    """
+    prompt = f"""
+    Genera 10 respuestas a las preguntas que te voy a pasar
+    El formato debe seguir el formato:
+    {json_format}
+    Preguntas: {questions}
+    """
+    response = self._send_prompt(prompt, is_json=True)
+    answers = [item["answer"] for item in response]
+    return answers
+  
+  """
+  Objetivo: Generar temas del video
+  Solo va a cambiar cuando la lógica de generación de temas cambie
+  """
+  def get_topics(self, subtitles:str, perspective:str) -> list[str]:
+    json_format = """
+    [{
+      "topic": "tema del video"
+    }]
+    """
+    prompt = f"""
+    Genera 10 temas del video utilizando los subtitulos que te voy a pasar
+    Con un enfoque de {perspective}
+    El formato debe seguir el formato:
+    {json_format}
+    Subtitulos: {subtitles}
+    """
+    response = self._send_prompt(prompt, is_json=True)
+    topics = [item["topic"] for item in response]
+    return topics
   
   """
   Objetivo: Enviar prompt a la IA
