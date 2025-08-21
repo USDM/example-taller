@@ -1,6 +1,6 @@
 from dto import VideoContent, VideoMetadata, VideoComment, VideoCommentRating, SubcontentType
-from content_video_generator.subtitle_extractor import SubtitleExtractor
-from ia import GeminiService
+from .subtitle_extractor import SubtitleExtractor
+from utility import GeminiService
 
 """
 Objetivo: Generar contenido de video

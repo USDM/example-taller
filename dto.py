@@ -67,6 +67,7 @@ class SubcontentType(Enum):
   ANSWER = "answer"
   TOPIC = "topic"
   COMMENTS = "comments"
+  poema = "poema"
 
 
 @dataclass

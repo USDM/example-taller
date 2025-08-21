@@ -1,5 +1,5 @@
-from content_video_generator import ContentVideoGenerator
-from content_repository import ContentRepository
+from .content_video_generator import ContentVideoGenerator
+from .content_repository import ContentRepository
 from dto import VideoContent, SubcontentType, Error
 
 """
@@ -18,9 +18,9 @@ Solo va a cambiar cuando la lógica de  las solicitudes de contenido de video ca
 
 class ContentService:
 
-  def __init__(self):
+  def __init__(self, content_repository: ContentRepository):
     self.content_video_generator = ContentVideoGenerator()
-    self.content_repository = ContentRepository()
+    self.content_repository = content_repository
 
   def get_all_errors(self) -> list[Error]:
     return self.content_repository.get_all_errors()
