@@ -19,10 +19,12 @@ def main():
     #EN UN ENPOINT
     content_service = ContentService(content_repository)
     content_service.process_content_video(video_url)
+
+    content_service.generate_video_subcontent(2, SubcontentType.SUMMARY)
     
     ## EN UN ENPOINT
-    chat_content_service = ChatContentService(content_repository)
-    chat_content_service.chat_with_content(1, SubcontentType.COMMENTS, "¿Cuál es el tema principal del video?")
+    #chat_content_service = ChatContentService(content_repository)
+    #chat_content_service.chat_with_content(1, SubcontentType.COMMENTS, "¿Cuál es el tema principal del video?")
 
     #content_service.generate_summary(1)
     #content_service.generate_questions(1)

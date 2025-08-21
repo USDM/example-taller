@@ -1,6 +1,6 @@
 from dto import VideoContent, VideoMetadata, VideoComment, VideoCommentRating, SubcontentType
 from .subtitle_extractor import SubtitleExtractor
-from utility import GeminiService
+from utility import IA, IAMessage
 
 """
 Objetivo: Generar contenido de video
@@ -10,8 +10,11 @@ Solo va a cambiar cuando la lógica de generación de contenido de video cambie
 class ContentVideoGenerator:
 
   def __init__(self):
-    self.gemini_service = GeminiService()
-   
+    self.ia = None
+
+  def set_ia(self, ia:IA):
+    self.ia = ia
+
   """
   Objetivo: Generar subcontenido del video
   Solo va a cambiar cuando la lógica de generación de subcontenido cambie
@@ -43,7 +46,8 @@ class ContentVideoGenerator:
       summary="",
       questions=[],
       answers=[],
-      topics=[]
+      topics=[],
+      ia_name=self.ia.get_ia_name()
     )
 
   """
@@ -201,7 +205,7 @@ class ContentVideoGenerator:
   """
   def _send_prompt(self, prompt:str, is_json:bool) -> str:
     messages = [
-        {"role": "user", "parts": [prompt]},
+      IAMessage(role="user", content=prompt)
     ]
-    response = self.gemini_service.send_prompt(messages, is_json)
-    return response
+    response = self.ia.send_prompt(messages, is_json)
+    return response.content

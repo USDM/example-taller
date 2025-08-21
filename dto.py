@@ -30,6 +30,7 @@ class VideoContent:
   questions: list[str]
   answers: list[str]
   topics: list[str]
+  ia_name: str
   id: int|None = None
 
   def __str__(self):
@@ -40,6 +41,7 @@ class VideoContent:
     
     return f"""
       VideoContent:
+        IA: {self.ia_name}
         ID: {self.id}
         Title: {self.metadata.title}
         Authors: {', '.join(self.metadata.authors)}
