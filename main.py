@@ -2,8 +2,6 @@ from content_service.content_service import ContentService
 from chat_content_service.chat_content_service import ChatContentService
 from dto import SubcontentType, IANames
 from content_service.content_repository import ContentRepository
-from utility.ia.claude import ClaudeIA
-from utility.ia.gemini import GeminiIA
 
 """
 VAMOS A SUPONER QUE NOS LLEGAN NUEVOS REQUERIMIENTOS
