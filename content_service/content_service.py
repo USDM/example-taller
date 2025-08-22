@@ -1,6 +1,6 @@
 from .content_video_generator import ContentVideoGenerator
 from .content_repository import ContentRepository
-from dto import VideoContent, SubcontentType, Error
+from dto import VideoContent, SubcontentType, Error, IANames
 from utility.ia import GeminiIA, ClaudeIA
 
 """
@@ -49,7 +49,7 @@ class ContentService:
   def generate_video_subcontent(self, video_content_id:int, subcontent_type:SubcontentType):
     try:
       video_content = self.content_repository.get_content(video_content_id)
-      ia = ClaudeIA() if video_content.ia_name == "claude" else GeminiIA()
+      ia = ClaudeIA() if video_content.ia_name == IANames.CLAUDE.value else GeminiIA()
       self.content_video_generator.set_ia(ia)
       updated_video_content = self.content_video_generator.generate_subcontent(video_content, subcontent_type)
       self.content_repository.update_content(updated_video_content)

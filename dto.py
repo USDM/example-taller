@@ -73,6 +73,12 @@ class SubcontentType(Enum):
 
 
 @dataclass
+class IANames(Enum):
+  CLAUDE = "claude"
+  GEMINI = "gemini"
+
+
+@dataclass
 class Error:
   message: str
   title: str

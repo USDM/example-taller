@@ -1,16 +1,13 @@
-from dto import SubcontentType
-from utility import GeminiService
+from dto import SubcontentType, IANames
+from utility.ia import GeminiIA, ClaudeIA, IA, IAMessage
 from content_service.content_repository import ContentRepository
 
 class ChatContentService:
 
   def __init__(self, chat_content_repository: ContentRepository):
     self.chat_content_repository = chat_content_repository
-    self.gemini_service = GeminiService()
 
-
-
-  def chat_with_content(self, video_content_id:int, subcontent_type:SubcontentType, message:str):
+  def chat_with_content(self, video_content_id:int, subcontent_type:SubcontentType, message:str, ia_name:IANames):
     """
     Obtener el contenido del video por medio del id
     Obtener el subcontenido por medio del atributo de video
@@ -29,7 +26,8 @@ class ChatContentService:
       El usuario te ha enviado el siguiente mensaje: {message}
       El contenido del video es el siguiente: {attribute_value}
     """
-    response = self._send_prompt(prompt, is_json=False)
+    ia = ClaudeIA() if ia_name.value == IANames.CLAUDE.value else GeminiIA()
+    response = self._send_prompt(prompt, is_json=False, ia=ia)
     print("LA RESPUESTA --------------------------------")
     print(response)
     return response
@@ -40,11 +38,11 @@ class ChatContentService:
   Objetivo: Enviar prompt a la IA
   Solo va a cambiar cuando la lógica de envío de prompt a la IA cambie
   """
-  def _send_prompt(self, prompt:str, is_json:bool) -> str:
+  def _send_prompt(self, prompt:str, is_json:bool, ia: IA) -> str:
     messages = [
-        {"role": "user", "parts": [prompt]},
+      IAMessage(role="user", content=prompt)
     ]
-    response = self.gemini_service.send_prompt(messages, is_json)
-    return response
+    response = ia.send_prompt(messages, is_json)
+    return response.content
 
       
