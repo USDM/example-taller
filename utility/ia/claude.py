@@ -9,6 +9,7 @@ except ImportError:
     anthropic = None
 
 from .base_ia import IA, IAMessage, IAResponse
+from dto import IANames
 
 load_dotenv()
 
@@ -26,7 +27,7 @@ class ClaudeIA(IA):
     """
 
     def get_ia_name(self) -> str:
-        return CLAUDE_IA_NAME
+        return IANames.CLAUDE.value
     
     def __init__(self, api_key: Optional[str] = None, model_name: Optional[str] = None):
         """
@@ -60,7 +61,7 @@ class ClaudeIA(IA):
         self.client = anthropic.Anthropic(api_key=self.api_key)
         
         # Configuración por defecto
-        self.max_tokens = 2048
+        self.max_tokens = 8000
         self.temperature = 0.9
     
     def _validate_configuration(self) -> None:
@@ -235,4 +236,4 @@ class ClaudeIA(IA):
         Returns:
             str: "claude-3-haiku-20240307"
         """
-        return "claude-3-haiku-20240307" 
+        return "claude-sonnet-4-20250514" 

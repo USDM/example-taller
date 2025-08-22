@@ -1,36 +1,28 @@
 from dto import VideoContent, Error
+from typing import Protocol
 
 """
 Objetivo: Guardar contenido de video en base de datos
 Solo va a cambiar cuando la lógica de guardado de contenido de video cambie
 """
-class ContentRepository:
-
-  def __init__(self):
-    self.memory = {}
-    self.errores = {}
+class ContentRepository(Protocol):
 
   def save_content(self, content_video:VideoContent) -> VideoContent:
-    id = len(self.memory) + 1
-    self.memory[id] = content_video
-    content_video.id = id
-    return content_video
+    pass
   
 
   def get_content(self, id:int) -> VideoContent:
-    return self.memory[id]
+    pass
   
 
   def update_content(self, content_video:VideoContent):
-    self.memory[content_video.id] = content_video
-
+    pass
 
   def save_error(self, error:Error):
-    id = len(self.errores) + 1
-    self.errores[id] = error
-    error.id = id
-    return error
+    pass
   
   def get_all_errors(self) -> list[Error]:
-    return list(self.errores.values())
+    pass
   
+  def get_user_email(self, user_id:int) -> str:
+    pass

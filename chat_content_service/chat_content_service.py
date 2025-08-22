@@ -1,7 +1,7 @@
 from dto import SubcontentType, IANames
 from utility.ia import GeminiIA, ClaudeIA, IA, IAMessage
-from content_service.content_repository import ContentRepository
-
+from content_service.content_repository.content_repository import ContentRepository
+from utility.ia import FactoryIA
 class ChatContentService:
 
   def __init__(self, chat_content_repository: ContentRepository):
@@ -26,7 +26,7 @@ class ChatContentService:
       El usuario te ha enviado el siguiente mensaje: {message}
       El contenido del video es el siguiente: {attribute_value}
     """
-    ia = ClaudeIA() if ia_name.value == IANames.CLAUDE.value else GeminiIA()
+    ia = FactoryIA.create(ia_name) #ClaudeIA() if ia_name.value == IANames.CLAUDE.value else GeminiIA()
     response = self._send_prompt(prompt, is_json=False, ia=ia)
     print("LA RESPUESTA --------------------------------")
     print(response)
