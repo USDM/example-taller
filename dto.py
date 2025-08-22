@@ -31,6 +31,8 @@ class VideoContent:
   answers: list[str]
   topics: list[str]
   ia_name: str
+  critical_perspective: str
+  sources: list[str]
   id: int|None = None
 
   def __str__(self):
@@ -77,6 +79,12 @@ class IANames(Enum):
   CLAUDE = "claude"
   GEMINI = "gemini"
 
+@dataclass
+class UserType(Enum):
+  FREE = "free"
+  SUSCRIBED = "subscribed"
+  PREMIUM = "premium"
+  STUDENT = "student"
 
 @dataclass
 class Error:

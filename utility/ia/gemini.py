@@ -5,6 +5,7 @@ import json
 from dotenv import load_dotenv
 
 from .base_ia import IA, IAMessage, IAResponse
+from dto import IANames
 
 load_dotenv()
 
@@ -21,7 +22,7 @@ class GeminiIA(IA):
     """
 
     def get_ia_name(self) -> str:
-        return GEMINI_IA_NAME
+        return IANames.GEMINI.value
     
     def __init__(self, api_key: Optional[str] = None, model_name: Optional[str] = None):
         """
@@ -50,7 +51,7 @@ class GeminiIA(IA):
             'temperature': 0.9,
             'top_p': 1,
             'top_k': 40,
-            'max_output_tokens': 2048,
+            'max_output_tokens': 20000,
             'stop_sequences': [],
         }
         
@@ -132,7 +133,14 @@ class GeminiIA(IA):
                 except json.JSONDecodeError:
                     print(f"Error al parsear como JSON: {text}")
                     result = self.send_simple_prompt(f"Ocurrio un error al parsear como JSON: {text} dame el correcto formato sin explicaciones solo el json")
-                    content = json.loads(result)
+                    try:
+                        content = json.loads(result)
+                    except json.JSONDecodeError:
+                        print(f"Error al parsear como JSON: {result}")
+                        result = self.send_simple_prompt(f"Ocurrio por segunda vez un error al parsear como JSON: {text} dame el correcto formato sin explicaciones solo el json")
+                        content = json.loads(result)
+
+                        raise Exception(f"Error al parsear como JSON: {result}")
             else:
                 content = response.text
             
