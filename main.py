@@ -1,57 +1,39 @@
-from content_service.content_service import ContentService
-from chat_content_service.chat_content_service import ChatContentService
-from dto import SubcontentType, IANames
-from content_service.content_repository.content_repository import ContentRepository
-from content_service.content_video_generator import ProContentVideoGenerator
-from dto import UserType
-from content_service.factory_user_content import FreeFactoryUserContent, SuscribeFactoryUserContent, ProFactoryUserContent
-from content_service.user_repository import MemoryUserRepository
-from content_service.user_repository.factory_user_repository import FactoryUserRepository
+"""
+
+Nos solicitan que rodolfo ficticio pueda buscar series por nombre 
+cuando escribe un nombre de serie incompleto le tiene que enviar todas las series que coincidan con el nombre que escribio
+
 
 """
-VAMOS A SUPONER QUE NOS LLEGAN NUEVOS REQUERIMIENTOS
 
-1. Se necesita una configuracion por parte del administrador para decidir
-ias
-envio de correo
-analisis de apis
+from modules.content_ia.infrastructure.factory_use_cases import create_generate_content_use_case
 
-"""
+from modules.series.infrastructure.factory_use_cases import create_series_service, create_calculate_indicator_use_case
+from modules.series.use_cases.dto import SourceName, WindowIndicatorType, WindowIndicatorConfig 
+from modules.content_ia.use_cases.dto import SourceType
 
 def main():
 
-    FactoryUserRepository()
+    
 
-    #content_repository = ContentRepository()
     video_url = "https://www.youtube.com/watch?v=aa_GIiivHTw"
+    source_path = "media/test.pdf"
+    tweet_path = "media/fake_1.PNG"
+    user_id = 4
+    content_service = create_generate_content_use_case()
+    content_service.process_content(tweet_path, user_id, SourceType.TWEET)
 
-    user_id = 2
+    return
 
-    #EN UN ENPOINT
-    content_service = ContentService()
-    content_service.process_content_video(video_url, user_id)
+    #series_service = create_series_service()
+    #series_service.search_match_series("APP", SourceName.TRADING, 3)
+
+    window_indicator_type = WindowIndicatorType.RSI
+    window_indicator_config = WindowIndicatorConfig(period=100000000)
+
+    calculate_indicator_use_case = create_calculate_indicator_use_case()
+    calculate_indicator_use_case.calculate_window_indicator(1, window_indicator_type, window_indicator_config)
 
 
-    #content_service.generate_video_subcontent(2, SubcontentType.SUMMARY)
-
-    #chat_content_service = ChatContentService(content_repository)
-    #ia_name = "gemini"
-
-    #ia_name_enum = IANames(ia_name)
-
-    #chat_content_service.chat_with_content(1, SubcontentType.COMMENTS, "¿Cuál es el tema principal del video?", ia_name_enum)
-    
-    ## EN UN ENPOINT
-    #chat_content_service = ChatContentService(content_repository)
-    #chat_content_service.chat_with_content(1, SubcontentType.COMMENTS, "¿Cuál es el tema principal del video?")
-
-    #content_service.generate_summary(1)
-    #content_service.generate_questions(1)
-
-    #content_service.generate_video_subcontent(1, SubcontentType.SUMMARY)
-    
-
-    
 if __name__ == "__main__":
     main()
-
