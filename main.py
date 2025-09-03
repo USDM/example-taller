@@ -11,17 +11,25 @@ from modules.content_ia.infrastructure.factory_use_cases import create_generate_
 from modules.series.infrastructure.factory_use_cases import create_series_service, create_calculate_indicator_use_case
 from modules.series.use_cases.dto import SourceName, WindowIndicatorType, WindowIndicatorConfig 
 from modules.content_ia.use_cases.dto import SourceType
+from modules.content_ia.use_cases.chat_with_content_use_case import ChatWithContentUseCase
+from modules.content_ia.infrastructure.content_repository.search_content import SearchContentRepository
+from modules.content_ia.infrastructure.content_repository.chat_ia import ChatIARepository
 
 def main():
 
     
 
-    video_url = "https://www.youtube.com/watch?v=aa_GIiivHTw"
-    source_path = "media/test.pdf"
-    tweet_path = "media/fake_1.PNG"
-    user_id = 4
-    content_service = create_generate_content_use_case()
-    content_service.process_content(tweet_path, user_id, SourceType.TWEET)
+    # video_url = "https://www.youtube.com/watch?v=aa_GIiivHTw"
+    # source_path = "media/test.pdf"
+    # tweet_path = "media/fake_1.PNG"
+    # user_id = 4
+    # content_service = create_generate_content_use_case()
+    # content_service.process_content(tweet_path, user_id, SourceType.TWEET)
+
+    chat_with_content_use_case = ChatWithContentUseCase(SearchContentRepository(), ChatIARepository())
+    chat_with_content_use_case.chat_with_content(1, "¿de que estamos hablando?")
+
+
 
     return
 
