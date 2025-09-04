@@ -11,8 +11,26 @@ from modules.content_ia.infrastructure.factory_use_cases import create_generate_
 from modules.series.infrastructure.factory_use_cases import create_series_service, create_calculate_indicator_use_case
 from modules.series.use_cases.dto import SourceName, WindowIndicatorType, WindowIndicatorConfig 
 from modules.content_ia.use_cases.dto import SourceType
+from modules.content_ia.infrastructure.factory_use_cases import create_chat_ia_use_case
+
+from modules.content_ia.use_cases.chat_ia_use_case.chat_ia_use_case import ChatIAUseCase
+
+from modules.content_ia.infrastructure.search_content_repository import MemorySearchContentRepository
+from modules.content_ia.infrastructure.ia import GeminiIA
 
 def main():
+
+    """
+    Rodolfo ficticio pueda chatear con una IA sobre comentarios de un contenido
+    """
+
+
+    chat_ia_use_case = create_chat_ia_use_case()
+
+    response = chat_ia_use_case.send_message(1, "Cual es el texto que te mande")
+    print(response)
+
+    return
 
     
 
