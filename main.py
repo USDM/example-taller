@@ -12,18 +12,22 @@ from modules.series.infrastructure.factory_use_cases import create_series_servic
 from modules.series.use_cases.dto import SourceName, WindowIndicatorType, WindowIndicatorConfig 
 from modules.content_ia.use_cases.dto import SourceType
 
+from modules.content_ia.infrastructure.factory_use_cases import create_chat_ia_use_case
+
 def main():
 
-    
-
-    video_url = "https://www.youtube.com/watch?v=aa_GIiivHTw"
-    source_path = "media/test.pdf"
-    tweet_path = "media/fake_1.PNG"
-    user_id = 4
-    content_service = create_generate_content_use_case()
-    content_service.process_content(tweet_path, user_id, SourceType.TWEET)
-
+    chat_ia_use_case = create_chat_ia_use_case(message="Que comentario es el que mas se acerca a la realidad?", content_id=1)
+    print(chat_ia_use_case)
     return
+
+    # video_url = "https://www.youtube.com/watch?v=aa_GIiivHTw"
+    # source_path = "media/test.pdf"
+    # tweet_path = "media/fake_1.PNG"
+    # user_id = 4
+    # content_service = create_generate_content_use_case()
+    # content_service.process_content(tweet_path, user_id, SourceType.TWEET)
+
+    # return
 
     #series_service = create_series_service()
     #series_service.search_match_series("APP", SourceName.TRADING, 3)
