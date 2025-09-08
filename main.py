@@ -17,10 +17,17 @@ from modules.content_ia.search_content_repository.memory_search_content_reposito
 
 from modules.content_ia.infrastructure.factory_use_cases import create_chat_ia_use_case
 
+from modules.content_ia.use_cases.emails_use_case import EmailsUseCase
+
+from modules.content_ia.infrastructure.factory_use_cases import create_send_email_use_case
+
 def main():
 
-    chat_ia_use_case = create_chat_ia_use_case()
-    chat_ia_use_case.chatWithContentIa(1, "que comentarios te mande?")
+    # chat_ia_use_case = create_chat_ia_use_case()
+    # chat_ia_use_case.chatWithContentIa(1, "que comentarios te mande?")
+
+    email_use_case = create_send_email_use_case()
+    email_use_case.send_email(1)
 
     # video_url = "https://www.youtube.com/watch?v=aa_GIiivHTw"
     # source_path = "media/test.pdf"
