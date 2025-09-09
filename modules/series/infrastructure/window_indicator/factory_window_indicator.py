@@ -3,6 +3,7 @@ from ...use_cases.dto import WindowIndicatorType
 from .sma_window_indicator import SMAWindowIndicator
 from .roc_window_indicator import ROCWindowIndicator
 from .rsi_window_indicator import RSIWindowIndicator
+from .macd_window_indicator import MACDWindowIndicator
 
 class FactoryWindowIndicator(FactoryWindowIndicatorInterface):
 
@@ -13,5 +14,7 @@ class FactoryWindowIndicator(FactoryWindowIndicatorInterface):
       return ROCWindowIndicator()
     elif window_indicator_type.value == WindowIndicatorType.RSI.value:
       return RSIWindowIndicator()
+    elif  window_indicator_type.value == WindowIndicatorType.MACD.value:
+      return MACDWindowIndicator()
     else:
       raise ValueError(f"Window indicator type {window_indicator_type} not supported")
