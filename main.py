@@ -21,10 +21,15 @@ from modules.content_ia.use_cases.emails_use_case import EmailsUseCase
 
 from modules.content_ia.infrastructure.factory_use_cases import create_send_email_use_case
 
+from modules.common.tables import TableResponseIa
+
 def main():
 
-    # chat_ia_use_case = create_chat_ia_use_case()
-    # chat_ia_use_case.chatWithContentIa(1, "que comentarios te mande?")
+
+    chat_ia_use_case = create_chat_ia_use_case()
+    for pasda in [1,2,3]:
+        chat_ia_use_case.chatWithContentIa(1, "que comentarios te mande?")
+    print(TableResponseIa().data)
 
     # email_use_case = create_send_email_use_case()
     # email_use_case.send_email(1)
@@ -36,8 +41,8 @@ def main():
     # content_service = create_generate_content_use_case()
     # content_service.process_content(tweet_path, user_id, SourceType.TWEET)
 
-    series_service = create_series_service()
-    series_service.search_match_series("APP", SourceName.GOOGLE, 3)
+    # series_service = create_series_service()
+    # series_service.search_match_series("APP", SourceName.GOOGLE, 3)
 
     # window_indicator_type = WindowIndicatorType.MACD
     # window_indicator_config = WindowIndicatorConfig(period=2)
