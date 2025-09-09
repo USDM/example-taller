@@ -38,6 +38,39 @@ class SeriesData:
     """
 
 @dataclass
+class LastSerieDataInfo:
+  name: str
+  date: str
+  close: float
+
+  def __str__(self):
+    return f"""
+    Name: {self.name}
+    Date: {self.date}
+    Close: {self.close}
+    """
+
+@dataclass
+class ContentSerie:
+  comments: list[str]
+  summary: str
+  projections: str
+
+  def __str__(self):
+    comments_str = ', '.join(self.comments)
+
+    return f"""
+    Comments:
+      {self.comments}
+
+    Summary:
+      {self.Summary}
+
+    Projections:
+      {self.projections}
+    """
+
+@dataclass
 class SourceName(Enum):
   TRADING = "trading"
   YAHOO = "yahoo"
