@@ -38,7 +38,7 @@ class SearchSeriesUseCase:
       if (user_type.value == UserType.SUSCRIBED.value or user_type.value == UserType.STUDENT.value) and (source_name.value != SourceName.FRED.value and source_name.value != SourceName.YAHOO.value):
         raise UserTypeNotAllowedError(user_email, user_type.value, source_name.value)
       
-      if (user_type.value == UserType.PREMIUM.value) and (source_name.value != SourceName.FRED.value and source_name.value != SourceName.YAHOO.value and source_name.value != SourceName.TRADING.value):
+      if (user_type.value == UserType.PREMIUM.value) and (source_name.value != SourceName.FRED.value and source_name.value != SourceName.YAHOO.value and source_name.value != SourceName.TRADING.value and source_name.value != SourceName.GOOGLE.value):
         raise UserTypeNotAllowedError(user_email, user_type.value, source_name.value)  
 
       api_series = self.factory_api_series.create_api_series(source_name)

@@ -4,6 +4,7 @@ from ...use_cases.dto import SourceName
 from .fred_api_series import FredApiSeries
 from .test_api_series import TestApiSeries
 from .yahoo_api_series import YahooApiSeries
+from .google_api_series import GoogleApiSeries
 
 class FactoryApiSeries(FactoryApiSeriesInterface):
 
@@ -14,5 +15,7 @@ class FactoryApiSeries(FactoryApiSeriesInterface):
       return FredApiSeries()
     elif source_name.value == SourceName.YAHOO.value:
       return YahooApiSeries()
+    elif source_name.value == SourceName.GOOGLE.value:
+      return GoogleApiSeries()
     else:
       raise ValueError(f"Source name {source_name} not supported")

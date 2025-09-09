@@ -43,6 +43,7 @@ class SourceName(Enum):
   YAHOO = "yahoo"
   FRED = "fred"
   TEST = "test"
+  GOOGLE = "google"
 
 
 @dataclass

@@ -36,14 +36,14 @@ def main():
     # content_service = create_generate_content_use_case()
     # content_service.process_content(tweet_path, user_id, SourceType.TWEET)
 
-    # series_service = create_series_service()
-    # series_service.search_match_series("APP", SourceName.TRADING, 3)
+    series_service = create_series_service()
+    series_service.search_match_series("APP", SourceName.GOOGLE, 3)
 
-    window_indicator_type = WindowIndicatorType.MACD
-    window_indicator_config = WindowIndicatorConfig(period=2)
+    # window_indicator_type = WindowIndicatorType.MACD
+    # window_indicator_config = WindowIndicatorConfig(period=2)
 
-    calculate_indicator_use_case = create_calculate_indicator_use_case()
-    calculate_indicator_use_case.calculate_window_indicator(1, window_indicator_type, window_indicator_config)
+    # calculate_indicator_use_case = create_calculate_indicator_use_case()
+    # calculate_indicator_use_case.calculate_window_indicator(1, window_indicator_type, window_indicator_config)
 
 
 if __name__ == "__main__":
