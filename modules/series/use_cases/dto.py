@@ -64,7 +64,7 @@ class ContentSerie:
       {self.comments}
 
     Summary:
-      {self.Summary}
+      {self.summary}
 
     Projections:
       {self.projections}
@@ -109,3 +109,15 @@ class WindowIndicatorData:
     Date: {self.date}
     Value: {self.value}
     """
+
+@dataclass
+class IANames(Enum):
+  CLAUDE = "claude"
+  GEMINI = "gemini"
+
+@dataclass
+class UserType(Enum):
+  FREE = "free"
+  SUSCRIBED = "subscribed"
+  PREMIUM = "premium"
+  STUDENT = "student"

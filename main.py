@@ -20,16 +20,22 @@ from modules.content_ia.infrastructure.factory_use_cases import create_chat_ia_u
 from modules.content_ia.use_cases.emails_use_case import EmailsUseCase
 
 from modules.content_ia.infrastructure.factory_use_cases import create_send_email_use_case
+from modules.series.infrastructure.factory_use_cases import create_generate_content_use_case
 
 from modules.common.tables import TableResponseIa
 
 def main():
 
+    content_generator = create_generate_content_use_case()
+    content = content_generator.generate_content_serie(1)
 
-    chat_ia_use_case = create_chat_ia_use_case()
-    for pasda in [1,2,3]:
-        chat_ia_use_case.chatWithContentIa(1, "que comentarios te mande?")
-    print(TableResponseIa().data)
+    print(content)
+
+
+    # chat_ia_use_case = create_chat_ia_use_case()
+    # for pasda in [1,2,3]:
+    #     chat_ia_use_case.chatWithContentIa(1, "que comentarios te mande?")
+    # print(TableResponseIa().data)
 
     # email_use_case = create_send_email_use_case()
     # email_use_case.send_email(1)

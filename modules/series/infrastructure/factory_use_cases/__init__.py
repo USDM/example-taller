@@ -1,4 +1,5 @@
 from .factory_series_service import create_series_service
 from .factory_calculate_indicator_use_case import create_calculate_indicator_use_case
+from .factory_generate_content_use_case import create_generate_content_use_case
 
-__all__ = ["create_series_service", "create_calculate_indicator_use_case"]
+__all__ = ["create_series_service", "create_calculate_indicator_use_case", "create_generate_content_use_case"]
