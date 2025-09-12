@@ -29,13 +29,18 @@ class GenerateContentIndicatorUseCase:
         """
         serie_info = self.last_serie_data.get_last_data(serie_id)
         window_indicator_config = WindowIndicatorConfig(period=2)
-        indicators_data = {}
+        indicators_info = []
         for window_indicator_type in WindowIndicatorType:
             series_data = self.series_repository.get_series_data(serie_id)            
             window_indicator = self.factory_window_indicator.create_window_indicator(window_indicator_type)
             window_indicator_data = window_indicator.calculate(series_data, window_indicator_config)
+            print("window_indicator_data", window_indicator_data)
             for item in window_indicator_data:
-                indicators_data.append(window_indicator_type, item)
+                ultimo_valor = item.value
+                indicators_info.append({
+                    'type': window_indicator_type.name,
+                    'value': ultimo_valor
+                })
                 print(item)
-        return indicators_data
+        return indicators_info
 
