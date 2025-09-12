@@ -1,18 +1,20 @@
 from ..generate_content_use_case.interfaces import LastSerieDataInterface
 from ...use_cases.calculate_indicator_use_case.interfaces import SeriesRepository, FactoryWindowIndicator
 from ...use_cases.dto import WindowIndicatorType, WindowIndicatorConfig
+from .interfaces import IGenerateContentIndicatorIA
 
 class GenerateContentIndicatorUseCase:
 
     def __init__(self, 
         last_serie_data:LastSerieDataInterface,
         series_repository:SeriesRepository,
-        factory_window_indicator:FactoryWindowIndicator
+        factory_window_indicator:FactoryWindowIndicator,
+        i_generate_content_indicator_ia:IGenerateContentIndicatorIA
     ):
         self.last_serie_data = last_serie_data
         self.series_repository = series_repository
         self.factory_window_indicator = factory_window_indicator
-
+        self.i_generate_content_indicator_ia = i_generate_content_indicator_ia
     def generate_content_indicator(self, serie_id:int):
         """
         1.-Recibir serie_id
@@ -39,6 +41,7 @@ class GenerateContentIndicatorUseCase:
                 'type': window_indicator_type.name,
                 'value': ultimo_valor
             })
-            print("indicators_info", indicators_info)
+        self.i_generate_content_indicator_ia.generate_content_indicator_ia(indicators_info, indicators_info)
+        print("indicators_info", indicators_info)
         return True
 
