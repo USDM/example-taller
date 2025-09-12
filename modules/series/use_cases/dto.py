@@ -71,6 +71,24 @@ class ContentSerie:
     """
 
 @dataclass
+class ContentIndicatorInfo:
+  content: str
+  indicators_analysis: str
+  recommendations: str
+
+  def __str__(self):
+    return f"""
+    Content:
+      {self.content}
+
+    Indicators Analysis:
+      {self.indicators_analysis}
+
+    Recommendations:
+      {self.recommendations}
+    """
+
+@dataclass
 class SourceName(Enum):
   TRADING = "trading"
   YAHOO = "yahoo"

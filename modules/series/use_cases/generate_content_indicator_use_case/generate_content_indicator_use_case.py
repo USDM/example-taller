@@ -41,7 +41,6 @@ class GenerateContentIndicatorUseCase:
                 'type': window_indicator_type.name,
                 'value': ultimo_valor
             })
-        self.i_generate_content_indicator_ia.generate_content_indicator_ia(indicators_info, indicators_info)
-        print("indicators_info", indicators_info)
-        return True
+        content_indicator_info = self.i_generate_content_indicator_ia.generate_content_indicator_ia(indicators_info, indicators_info)
+        return content_indicator_info
 

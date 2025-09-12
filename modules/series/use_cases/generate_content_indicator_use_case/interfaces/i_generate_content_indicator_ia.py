@@ -1,6 +1,5 @@
 from typing import Protocol
-from ...dto import LastSerieDataInfo
-from ...dto import WindowIndicatorType
+from ...dto import LastSerieDataInfo, WindowIndicatorType, ContentIndicatorInfo
 
 
 class IGenerateContentIndicatorIA(Protocol):
