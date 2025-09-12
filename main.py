@@ -24,12 +24,21 @@ from modules.series.infrastructure.factory_use_cases import create_generate_cont
 
 from modules.common.tables import TableResponseIa
 
+from modules.series.infrastructure.factory_use_cases import create_generate_content_indicator_use_case
+
+
+
 def main():
 
-    content_generator = create_generate_content_use_case()
-    content = content_generator.generate_content_serie(1)
+    generate_content_indicator_use_case = create_generate_content_indicator_use_case()
+    content = generate_content_indicator_use_case.generate_content_indicator(1)
+    print(content, "content")
+    
 
-    print(content)
+    # content_generator = create_generate_content_use_case()
+    # content = content_generator.generate_content_serie(1)
+
+    # print(content)
 
 
     # chat_ia_use_case = create_chat_ia_use_case()
