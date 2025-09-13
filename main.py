@@ -24,12 +24,35 @@ from modules.series.infrastructure.factory_use_cases import create_generate_cont
 
 from modules.common.tables import TableResponseIa
 
+from modules.series.use_cases.generate_content_use_case import GenerateContentUseCase
+from modules.series.use_cases.generate_content_use_case.interfaces import(
+    FactoryWindowIndicator,
+    GenerateContentIAInterface,
+    LastIndicatorDataInterface,
+    LastSerieDataInterface
+)
+
 def main():
 
-    content_generator = create_generate_content_use_case()
-    content = content_generator.generate_content_serie(1)
+    """
+        Objetivo: Apartir de una serie generar contenido con ia (Comentarios, resumen y proyecciones).
+        Reglas de negocio:
+        -Utilizar el ultimo dato de la serie
+        -Utilizar el ultimo dato de cada uno de los indicadores
+        -Por cada indicador generar el contenido de la serie
+    """
 
-    print(content)
+
+    # content_generator = create_generate_content_use_case()
+    # content = content_generator.generate_content_serie(1)
+
+    generate_content = GenerateContentUseCase(
+            generate_content_ia=GenerateContentIAInterface, 
+            last_serie_data=LastSerieDataInterface,
+            factory_window_inidicator= FactoryWindowIndicator,
+            last_inidicator_data= LastIndicatorDataInterface
+    )
+    generate_content.generate_content_serie_with_inidicators(1)
 
 
     # chat_ia_use_case = create_chat_ia_use_case()
