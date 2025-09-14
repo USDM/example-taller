@@ -1,3 +1,5 @@
+from typing import Optional
+
 from .interfaces import (
     GenerateContentIAInterface,
     LastSerieDataInterface,
@@ -12,8 +14,8 @@ class GenerateContentUseCase:
     def __init__(self, 
             generate_content_ia:GenerateContentIAInterface, 
             last_serie_data:LastSerieDataInterface,
-            factory_window_inidicator: FactoryWindowIndicator,
-            serie_data: SeriesRepository
+            factory_window_inidicator: Optional[FactoryWindowIndicator] = None ,
+            serie_data: Optional[SeriesRepository] = None
             ):
         self.generate_content_ia = generate_content_ia
         self.last_serie_data = last_serie_data

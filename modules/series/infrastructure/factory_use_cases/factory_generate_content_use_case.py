@@ -5,4 +5,6 @@ from ..last_serie_data import LastSerieData
 def create_generate_content_use_case() -> GenerateContentUseCase:
   generate_content_ia = GenerateContentIA()
   last_Serie_data = LastSerieData()
-  return GenerateContentUseCase(generate_content_ia, last_Serie_data)
+  return GenerateContentUseCase(
+    generate_content_ia=generate_content_ia, 
+    last_serie_data=last_Serie_data)
