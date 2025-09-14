@@ -4,7 +4,9 @@ from .interfaces import (
     GenerateContentIAInterface,
     LastSerieDataInterface,
     FactoryWindowIndicator,
-    SeriesRepository
+    SeriesRepository,
+    SearchUsersInterface,
+    SendEmailInterface
 )
 
 from ..dto import WindowIndicatorType, WindowIndicatorConfig
@@ -15,12 +17,16 @@ class GenerateContentUseCase:
             generate_content_ia:GenerateContentIAInterface, 
             last_serie_data:LastSerieDataInterface,
             factory_window_inidicator: Optional[FactoryWindowIndicator] = None ,
-            serie_data: Optional[SeriesRepository] = None
+            serie_data: Optional[SeriesRepository] = None,
+            users: Optional[SearchUsersInterface] = None,
+            send_email: Optional[SendEmailInterface] = None
             ):
         self.generate_content_ia = generate_content_ia
         self.last_serie_data = last_serie_data
         self.window_indicator = factory_window_inidicator
         self.serie_data = serie_data
+        self.users = users
+        self.send_email = send_email
 
     def generate_content_serie(self, serie_id:int):
         """
@@ -47,12 +53,16 @@ class GenerateContentUseCase:
         3. Calcular cada indicador
         4. Obtener ultimo dato de cada calculo del inidicador
         5. Por cada inidicador mandar el ultimo dato de la seria, nombre y el indicador correspondiente al prompt
+        6. Obtener los usuarios
+        7. Notificar via correo al usuario solo tipo pro, student y suscribed la generación del contenido
 
         1. series_repository
         2. last_serie_data_interface
         3. factory_window_inidicator (necesita window_indicator)
         4. None
         5. generate_content_ia_interface
+        6. user_repository
+        7. send_email_interface
         """
         series_data = self.serie_data.get_series_data(serie_id)
         serie_info = self.last_serie_data.get_last_data(serie_id)
@@ -71,6 +81,12 @@ class GenerateContentUseCase:
                 type_indicator=indicator
             )
             print(calculate)
+        users = self.users.get_users()
+        print(users)
+        self.send_email.send_email_to_users(users)
+            
+
+            
 
 
 

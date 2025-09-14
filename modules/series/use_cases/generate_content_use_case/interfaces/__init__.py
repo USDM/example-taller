@@ -3,5 +3,13 @@ from .last_serie_data_interface import LastSerieDataInterface
 from .factory_window_indicator import FactoryWindowIndicator
 from .window_indicator import WindowIndicator
 from .series_repository import SeriesRepository
+from .search_users_interface import SearchUsersInterface
+from .send_email_interface import SendEmailInterface
 
-__all__ = ["GenerateContentIAInterface", "LastSerieDataInterface", "FactoryWindowIndicator",  "WindowIndicator", "SeriesRepository"]
+__all__ = ["GenerateContentIAInterface",
+ "LastSerieDataInterface", 
+ "FactoryWindowIndicator",  
+ "WindowIndicator", 
+ "SeriesRepository",
+ "SearchUsersInterface",
+ "SendEmailInterface"]

@@ -121,3 +121,8 @@ class UserType(Enum):
   SUSCRIBED = "subscribed"
   PREMIUM = "premium"
   STUDENT = "student"
+
+@dataclass
+class UserData:
+  user_email:str
+  user_type:str

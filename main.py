@@ -30,20 +30,34 @@ from modules.series.use_cases.generate_content_use_case import GenerateContentUs
 def main():
 
     """
-        Objetivo: Apartir de una serie generar contenido con ia (Comentarios, resumen y proyecciones).
-        Reglas de negocio:
-        -Utilizar el ultimo dato de la serie
-        -Utilizar el ultimo dato de cada uno de los indicadores
-        -Por cada indicador generar el contenido de la serie
+        Ejercicio principal: Generar contenido de series con indicadores
+            Objetivo: Apartir de una serie generar contenido con ia (Comentarios, resumen y proyecciones).
+            Reglas de negocio:
+            -Utilizar el ultimo dato de la serie
+            -Utilizar el ultimo dato de cada uno de los indicadores
+            -Por cada indicador generar el contenido de la serie
     """
-
 
     # content_generator = create_generate_content_with_indicator_use_case()
     # content_generator.generate_content_serie_with_inidicators(1)
 
-    content_generator = create_generate_content_use_case()
-    content =content_generator.generate_content_serie(1)
-    print(content)
+    """
+        Ejercicio 1: Enviar una notificacion por correo, solo para usuarios, pro, student, suscribed
+            Objetivo: Apartir de una serie generar contenido con ia (Comentarios, resumen y proyecciones)
+            y de acuerdo al tipo de usuario generar una notifiación por correo.
+            Reglas de negocio:
+            -Utilizar el ultimo dato de la serie
+            -Utilizar el ultimo dato de cada uno de los indicadores
+            -Por cada indicador generar el contenido de la serie
+            -Los usuarios tipo pro, student y suscribed se les notifica via correo la generación de este contenido
+    """
+
+    content_generator = create_generate_content_with_indicator_use_case()
+    content_generator.generate_content_serie_with_inidicators(1)
+
+    # content_generator = create_generate_content_use_case()
+    # content =content_generator.generate_content_serie(1)
+    # print(content)
 
     # chat_ia_use_case = create_chat_ia_use_case()
     # for pasda in [1,2,3]:
