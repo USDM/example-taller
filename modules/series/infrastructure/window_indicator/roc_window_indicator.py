@@ -5,6 +5,7 @@ import numpy as np
 class ROCWindowIndicator(WindowIndicator):
 
   def calculate(self, series_data: list[SeriesData], window_indicator_config: WindowIndicatorConfig) -> list[WindowIndicatorData]:
+    print("Se esta calculando ROC")
     if not series_data or window_indicator_config.period <= 0:
       return []
     

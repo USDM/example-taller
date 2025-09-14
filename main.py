@@ -20,17 +20,12 @@ from modules.content_ia.infrastructure.factory_use_cases import create_chat_ia_u
 from modules.content_ia.use_cases.emails_use_case import EmailsUseCase
 
 from modules.content_ia.infrastructure.factory_use_cases import create_send_email_use_case
-from modules.series.infrastructure.factory_use_cases import create_generate_content_use_case
+from modules.series.infrastructure.factory_use_cases import create_generate_content_with_indicator_use_case
 
 from modules.common.tables import TableResponseIa
 
 from modules.series.use_cases.generate_content_use_case import GenerateContentUseCase
-from modules.series.use_cases.generate_content_use_case.interfaces import(
-    FactoryWindowIndicator,
-    GenerateContentIAInterface,
-    LastIndicatorDataInterface,
-    LastSerieDataInterface
-)
+
 
 def main():
 
@@ -43,16 +38,8 @@ def main():
     """
 
 
-    # content_generator = create_generate_content_use_case()
-    # content = content_generator.generate_content_serie(1)
-
-    generate_content = GenerateContentUseCase(
-            generate_content_ia=GenerateContentIAInterface, 
-            last_serie_data=LastSerieDataInterface,
-            factory_window_inidicator= FactoryWindowIndicator,
-            last_inidicator_data= LastIndicatorDataInterface
-    )
-    generate_content.generate_content_serie_with_inidicators(1)
+    content_generator = create_generate_content_with_indicator_use_case()
+    content_generator.generate_content_serie_with_inidicators(1)
 
 
     # chat_ia_use_case = create_chat_ia_use_case()

@@ -5,6 +5,7 @@ import numpy as np
 class RSIWindowIndicator(WindowIndicator):
 
   def calculate(self, series_data: list[SeriesData], window_indicator_config: WindowIndicatorConfig) -> list[WindowIndicatorData]:
+    print("Se esta calculando RSI")
     if not series_data or window_indicator_config.period <= 0:
       return []
     

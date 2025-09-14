@@ -5,6 +5,7 @@ import numpy as np
 class SMAWindowIndicator(WindowIndicator):
 
   def calculate(self, series_data: list[SeriesData], window_indicator_config: WindowIndicatorConfig) -> list[WindowIndicatorData]:
+    print("Se esta calculando SMA")
     if not series_data or window_indicator_config.period <= 0:
       return []
     
