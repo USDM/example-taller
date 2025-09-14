@@ -47,6 +47,8 @@ def main():
             y de acuerdo al tipo de usuario generar una notifiación por correo.
             Reglas de negocio:
             -Utilizar el ultimo dato de la serie
+            -Restringir el calculo de indicadores por tipo de usuario, pro (todos los indicadores), student ( todos los indicadores), 
+             free (solo sma), suscribed ( sma, roc, rsi)
             -Utilizar el ultimo dato de cada uno de los indicadores
             -Por cada indicador generar el contenido de la serie
             -Los usuarios tipo pro, student y suscribed se les notifica via correo la generación de este contenido

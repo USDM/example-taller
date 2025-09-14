@@ -5,6 +5,7 @@ from .window_indicator import WindowIndicator
 from .series_repository import SeriesRepository
 from .search_users_interface import SearchUsersInterface
 from .send_email_interface import SendEmailInterface
+from .validate_user_interface import ValidateUserInterface
 
 __all__ = ["GenerateContentIAInterface",
  "LastSerieDataInterface", 
@@ -12,4 +13,6 @@ __all__ = ["GenerateContentIAInterface",
  "WindowIndicator", 
  "SeriesRepository",
  "SearchUsersInterface",
- "SendEmailInterface"]
+ "SendEmailInterface",
+ "ValidateUserInterface"
+ ]
