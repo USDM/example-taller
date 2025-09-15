@@ -121,3 +121,14 @@ class UserType(Enum):
   SUSCRIBED = "subscribed"
   PREMIUM = "premium"
   STUDENT = "student"
+
+@dataclass
+class User:
+  email: str
+  user_type: UserType
+
+  def __str__(self):
+    return f"""
+    Email: {self.email}
+    User Type: {self.user_type}
+    """

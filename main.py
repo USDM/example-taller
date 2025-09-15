@@ -9,7 +9,7 @@ cuando escribe un nombre de serie incompleto le tiene que enviar todas las serie
 from modules.content_ia.infrastructure.factory_use_cases import create_generate_content_use_case
 
 from modules.series.infrastructure.factory_use_cases import create_series_service, create_calculate_indicator_use_case
-from modules.series.use_cases.dto import SourceName, WindowIndicatorType, WindowIndicatorConfig 
+from modules.series.use_cases.dto import SourceName, WindowIndicatorType, WindowIndicatorConfig, UserType
 from modules.content_ia.use_cases.dto import SourceType
 
 from modules.content_ia.use_cases.chat_ia_use_case.chat_ia_use_case import ChatIAUseCase
@@ -26,10 +26,10 @@ from modules.common.tables import TableResponseIa
 
 def main():
 
-    content_generator = create_generate_content_use_case()
-    content = content_generator.generate_content_serie(1)
-
-    print(content)
+    # content_generator = create_generate_content_use_case()
+    # content, message = content_generator.generate_content_serie(1, 2)
+    # print(content)
+    # print(message)
 
 
     # chat_ia_use_case = create_chat_ia_use_case()
@@ -50,11 +50,12 @@ def main():
     # series_service = create_series_service()
     # series_service.search_match_series("APP", SourceName.GOOGLE, 3)
 
-    # window_indicator_type = WindowIndicatorType.MACD
-    # window_indicator_config = WindowIndicatorConfig(period=2)
+    window_indicator_type = WindowIndicatorType.MACD
+    window_indicator_config = WindowIndicatorConfig(period=2)
+    user_type = UserType.PREMIUM
 
-    # calculate_indicator_use_case = create_calculate_indicator_use_case()
-    # calculate_indicator_use_case.calculate_window_indicator(1, window_indicator_type, window_indicator_config)
+    calculate_indicator_use_case = create_calculate_indicator_use_case()
+    calculate_indicator_use_case.calculate_window_indicator(1, window_indicator_type, window_indicator_config, user_type)
 
 
 if __name__ == "__main__":
