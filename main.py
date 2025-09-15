@@ -20,32 +20,16 @@ from modules.content_ia.infrastructure.factory_use_cases import create_chat_ia_u
 from modules.content_ia.use_cases.emails_use_case import EmailsUseCase
 
 from modules.content_ia.infrastructure.factory_use_cases import create_send_email_use_case
-from modules.series.infrastructure.factory_use_cases import create_generate_content_use_case
+from modules.series.infrastructure.factory_use_cases import create_generate_content_use_case, create_generate_content_use_case
 
 from modules.common.tables import TableResponseIa
 
-from modules.series.infrastructure.factory_use_cases import create_generate_content_indicator_use_case
-
-
-
 def main():
 
-<<<<<<< HEAD
     # content_generator = create_generate_content_use_case()
     # content, message = content_generator.generate_content_serie(1, 2)
     # print(content)
     # print(message)
-=======
-    generate_content_indicator_use_case = create_generate_content_indicator_use_case()
-    content = generate_content_indicator_use_case.generate_content_indicator(1)
-    print(content, "content")
-    
-
-    # content_generator = create_generate_content_use_case()
-    # content = content_generator.generate_content_serie(1)
-
-    # print(content)
->>>>>>> a4b35df2ccbc55275406eaea449fe9689c829354
 
 
     # chat_ia_use_case = create_chat_ia_use_case()
@@ -66,12 +50,17 @@ def main():
     # series_service = create_series_service()
     # series_service.search_match_series("APP", SourceName.GOOGLE, 3)
 
-    window_indicator_type = WindowIndicatorType.MACD
-    window_indicator_config = WindowIndicatorConfig(period=2)
+    # window_indicator_type = WindowIndicatorType.MACD
+    # window_indicator_config = WindowIndicatorConfig(period=2)
+    # user_type = UserType.PREMIUM
+
+    # calculate_indicator_use_case = create_calculate_indicator_use_case()
+    # calculate_indicator_use_case.calculate_window_indicator(1, window_indicator_type, window_indicator_config, user_type)
+
     user_type = UserType.PREMIUM
 
-    calculate_indicator_use_case = create_calculate_indicator_use_case()
-    calculate_indicator_use_case.calculate_window_indicator(1, window_indicator_type, window_indicator_config, user_type)
+    generate_content_indicator_use_case = create_generate_content_indicator_use_case()
+    generate_content_indicator_use_case.generate_content_indicator(1, user_type)
 
 
 if __name__ == "__main__":
