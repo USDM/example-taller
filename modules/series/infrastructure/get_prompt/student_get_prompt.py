@@ -1,5 +1,5 @@
 from ...use_cases.dto import LastSerieDataInfo, WindowIndicatorType
-from .generate_content_indicator_use_case.interfaces import GetPromptInterface
+from ...use_cases.generate_content_indicator_use_case.interfaces import GetPromptInterface
 
 
 class StudentGetPrompt(GetPromptInterface):
@@ -7,7 +7,7 @@ class StudentGetPrompt(GetPromptInterface):
         prompt = f"""
         PROMPT PARA STUDENT
         Dado el ultimo dato de la serie y su nombre y los indicadores.
-        Obtén comentarios, resumen y proyecciones.
+        Obtén comentarios, resumen, proyecciones, confianza, riesgo y tendencia.
         Datos:
         {last_serie_data}
         {indicators_info}
@@ -15,7 +15,10 @@ class StudentGetPrompt(GetPromptInterface):
         {{
         "comments": ["comentario 1", "comentario 2"],
         "summary": "resumen de la serie",
-        "projections": "proyecciones a futuro de la serie"
+        "projections": "proyecciones a futuro de la serie",
+        "confidence": "confianza en la proyeccion",
+        "risk": "riesgo de la proyeccion",
+        "trend": "tendencia de la proyeccion",
         }}
         Solo responde con el json
         """

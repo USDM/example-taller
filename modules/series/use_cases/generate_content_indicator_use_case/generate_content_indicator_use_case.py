@@ -47,9 +47,6 @@ class GenerateContentIndicatorUseCase:
         prompt_getter = self.get_prompt_factory.create(user_type)
         prompt = prompt_getter.get_prompt(serie_info, indicators_info)
 
-        print(prompt)
-
-        return True
         content_indicator_info = self.i_generate_content_indicator_ia.generate_content_indicator_ia(prompt)
         return content_indicator_info
 

@@ -1,5 +1,5 @@
 from ...use_cases.dto import UserType
-from .interfaces import GetPromptInterface
+from ...use_cases.generate_content_indicator_use_case.interfaces import GetPromptInterface
 from .free_get_prompt import FreeGetPrompt
 from .subs_get_prompt import SubsGetPrompt
 from .pro_get_prompt import ProGetPrompt

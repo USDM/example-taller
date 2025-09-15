@@ -55,6 +55,10 @@ class ContentSerie:
   comments: list[str]
   summary: str
   projections: str
+  confidence: float
+  risk: float
+  trend: str
+  recommendation: str
 
   def __str__(self):
     comments_str = ', '.join(self.comments)
@@ -68,6 +72,18 @@ class ContentSerie:
 
     Projections:
       {self.projections}
+
+    Confidence:
+      {self.confidence}
+
+    Risk:
+      {self.risk}
+
+    Trend:
+      {self.trend}
+
+    Recommendation:
+      {self.recommendation}
     """
 
 @dataclass

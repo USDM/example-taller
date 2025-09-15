@@ -20,7 +20,7 @@ from modules.content_ia.infrastructure.factory_use_cases import create_chat_ia_u
 from modules.content_ia.use_cases.emails_use_case import EmailsUseCase
 
 from modules.content_ia.infrastructure.factory_use_cases import create_send_email_use_case
-from modules.series.infrastructure.factory_use_cases import create_generate_content_use_case, create_generate_content_use_case
+from modules.series.infrastructure.factory_use_cases import create_generate_content_use_case, create_generate_content_indicator_use_case
 
 from modules.common.tables import TableResponseIa
 
@@ -57,10 +57,11 @@ def main():
     # calculate_indicator_use_case = create_calculate_indicator_use_case()
     # calculate_indicator_use_case.calculate_window_indicator(1, window_indicator_type, window_indicator_config, user_type)
 
-    user_type = UserType.PREMIUM
+    user_type = UserType.FREE
 
     generate_content_indicator_use_case = create_generate_content_indicator_use_case()
-    generate_content_indicator_use_case.generate_content_indicator(1, user_type)
+    content_indicator_info = generate_content_indicator_use_case.generate_content_indicator(1, user_type)
+    print(content_indicator_info)
 
 
 if __name__ == "__main__":

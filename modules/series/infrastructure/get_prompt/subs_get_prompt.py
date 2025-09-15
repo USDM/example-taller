@@ -1,5 +1,5 @@
 from ...use_cases.dto import LastSerieDataInfo, WindowIndicatorType
-from .generate_content_indicator_use_case.interfaces import GetPromptInterface
+from ...use_cases.generate_content_indicator_use_case.interfaces import GetPromptInterface
 
 
 class SubsGetPrompt(GetPromptInterface):
