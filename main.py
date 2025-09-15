@@ -51,6 +51,8 @@ def main():
              free (solo sma), suscribed ( sma, roc, rsi)
             -Utilizar el ultimo dato de cada uno de los indicadores
             -Por cada indicador generar el contenido de la serie
+            -El prompt se limitara para usuarios free (solo comentarios y menos caracteres), para los demas tipos generar todo el contenido pero 
+            aumentando caracteres por cada uno
             -Los usuarios tipo pro, student y suscribed se les notifica via correo la generación de este contenido
     """
 

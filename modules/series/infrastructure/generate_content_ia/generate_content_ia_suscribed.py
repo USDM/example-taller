@@ -4,7 +4,7 @@ from ...use_cases.generate_content_use_case.interfaces import GenerateContentIAI
 from ..ia.gemini import GeminiIA
 from ...use_cases.shared.base_ia import IAMessage
 
-class GenerateContentIA(GenerateContentIAInterface):
+class GenerateContentIASuscribed(GenerateContentIAInterface):
 
     def generate_content(self, serie_info:LastSerieDataInfo) -> ContentSerie:
         prompt = f"""
@@ -41,6 +41,8 @@ class GenerateContentIA(GenerateContentIAInterface):
         "summary": "resumen de la serie",
         "projections": "proyecciones a futuro de la serie"
         }}
+        IMPORTANTE
+        -Tienes un limite de 500 caracteres de respusta por cada comments, summary y projections
         Solo responde con el json
         """
         response = self._send_prompt(prompt, is_json=True)

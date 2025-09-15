@@ -1,5 +1,6 @@
 from dataclasses import dataclass
 from enum import Enum
+from typing import Optional
 
 @dataclass
 class SeriesInfo:
@@ -53,8 +54,8 @@ class LastSerieDataInfo:
 @dataclass
 class ContentSerie:
   comments: list[str]
-  summary: str
-  projections: str
+  summary: Optional[str] = None
+  projections: Optional[str] = None
 
   def __str__(self):
     comments_str = ', '.join(self.comments)

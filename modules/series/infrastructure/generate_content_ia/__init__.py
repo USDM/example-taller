@@ -1,3 +1,3 @@
-from .generate_content_ia_repo import GenerateContentIA
+from .factory_generate_content_ia import FactoryGenerateContentIA
 
-__all__ = ["GenerateContentIA"]
+__all__ = ["FactoryGenerateContentIA"]
