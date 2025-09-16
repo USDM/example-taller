@@ -7,6 +7,7 @@ class SeriesInfo:
   description: str
   url: str
   frequency: str
+  importance: int
 
   def __str__(self):
     return f"""
@@ -14,6 +15,7 @@ class SeriesInfo:
     Description: {self.description}
     Url: {self.url}
     Frequency: {self.frequency}
+    Importance: {self.importance}
     """
 
 @dataclass
@@ -155,14 +157,3 @@ class UserType(Enum):
   SUSCRIBED = "subscribed"
   PREMIUM = "premium"
   STUDENT = "student"
-
-@dataclass
-class User:
-  email: str
-  user_type: UserType
-
-  def __str__(self):
-    return f"""
-    Email: {self.email}
-    User Type: {self.user_type}
-    """

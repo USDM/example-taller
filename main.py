@@ -27,10 +27,8 @@ from modules.common.tables import TableResponseIa
 def main():
 
     # content_generator = create_generate_content_use_case()
-    # content, message = content_generator.generate_content_serie(1, 2)
+    # content = content_generator.generate_content_serie(1, 2)
     # print(content)
-    # print(message)
-
 
     # chat_ia_use_case = create_chat_ia_use_case()
     # for pasda in [1,2,3]:
@@ -60,8 +58,9 @@ def main():
     user_type = UserType.FREE
 
     generate_content_indicator_use_case = create_generate_content_indicator_use_case()
-    content_indicator_info = generate_content_indicator_use_case.generate_content_indicator(1, user_type)
+    content_indicator_info, message = generate_content_indicator_use_case.generate_content_indicator(1, user_type)
     print(content_indicator_info)
+    print(message)
 
 
 if __name__ == "__main__":

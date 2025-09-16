@@ -4,6 +4,8 @@ from ..series_repository import MemorySeriesRepository
 from ..window_indicator import FactoryWindowIndicator
 from ..generate_content_indicator_ia import GenerateContentIndicatorIA
 from ..get_prompt import GetPromptFactory
+from ..send_email import SendEmailFactory
+from ..validate_serie_usertype import ValidateSerieUserType
 
 def create_generate_content_indicator_use_case() -> GenerateContentIndicatorUseCase:
     last_serie_data = LastSerieData()
@@ -11,4 +13,14 @@ def create_generate_content_indicator_use_case() -> GenerateContentIndicatorUseC
     factory_window_indicator = FactoryWindowIndicator()
     i_generate_content_indicator_ia = GenerateContentIndicatorIA()
     get_prompt_factory = GetPromptFactory()
-    return GenerateContentIndicatorUseCase(last_serie_data, series_repository, factory_window_indicator, i_generate_content_indicator_ia, get_prompt_factory)
+    send_email_factory = SendEmailFactory()
+    validate_serie_user_type = ValidateSerieUserType()
+
+    return GenerateContentIndicatorUseCase(
+        last_serie_data, series_repository,
+        factory_window_indicator,
+        i_generate_content_indicator_ia,
+        get_prompt_factory,
+        send_email_factory,
+        validate_serie_user_type
+    )
