@@ -9,6 +9,7 @@ from .validate_user_interface import ValidateUserInterface
 from.factory_generate_content_ia import FactoryGenerateContentIA
 from .factory_validate_user import FactoryValidateUser
 from .factory_send_email import FactorySendEmail
+from .factory_last_serie import FactoryLastSerie
 
 __all__ = ["GenerateContentIAInterface",
  "LastSerieDataInterface", 
@@ -20,5 +21,6 @@ __all__ = ["GenerateContentIAInterface",
  "ValidateUserInterface",
  "FactoryGenerateContentIA",
  "FactoryValidateUser",
- "FactorySendEmail"
+ "FactorySendEmail",
+ "FactoryLastSerie"
  ]

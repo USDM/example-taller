@@ -7,7 +7,8 @@ from .interfaces import (
     SearchUsersInterface,
     FactoryGenerateContentIA,
     FactoryValidateUser,
-    FactorySendEmail
+    FactorySendEmail,
+    FactoryLastSerie
 )
 
 from ..dto import UserType, WindowIndicatorType, WindowIndicatorConfig
@@ -15,7 +16,7 @@ from ..dto import UserType, WindowIndicatorType, WindowIndicatorConfig
 class GenerateContentUseCase:
 
     def __init__(self, 
-            last_serie_data:LastSerieDataInterface,
+            factory_last_serie:FactoryLastSerie,
             factory_window_inidicator: Optional[FactoryWindowIndicator] = None ,
             serie_data: Optional[SeriesRepository] = None,
             users: Optional[SearchUsersInterface] = None,
@@ -23,7 +24,7 @@ class GenerateContentUseCase:
             factory_validate_user: Optional[FactoryValidateUser] = None,
             factory_generate_content_ia: Optional[FactoryGenerateContentIA] = None
             ):
-        self.last_serie_data = last_serie_data
+        self.factory_last_serie = factory_last_serie
         self.window_indicator = factory_window_inidicator
         self.serie_data = serie_data
         self.users = users
@@ -44,7 +45,8 @@ class GenerateContentUseCase:
         4. None
         """
 
-        serie_info = self.last_serie_data.get_last_data(serie_id)
+        serie = self.factory_last_serie.create_last_serie(user_type=UserType.PREMIUM.value)
+        serie_info = serie.get_last_data(serie_id=serie_id)
         content = self.factory_generate_content_ia.create_generate_content_ia(UserType.PREMIUM.value)
         content_serie = content.generate_content(serie_info)
 
@@ -54,7 +56,7 @@ class GenerateContentUseCase:
         """
         1. Obtener serie
         2. Obtener los usuarios
-        3. Obtener el nombre y ultimo dato de la serie
+        3. Obtener el nombre y ultimo dato de la serie restringiedo el tipo de grafica por usuario 
         4. Validar usuario para cada tipo de indicador 
         5. Calcular indicador.
         6. Obtener ultimo dato de cada calculo del inidicador
@@ -64,7 +66,7 @@ class GenerateContentUseCase:
 
         1. series_repository
         2. search_user_interface
-        3. last_serie_data_interface
+        3. factory_last_serie( necesita last_serie_data_interface)
         4. factory_validate_user (necesita validate_user_inteface)
         5. factory_window_inidicator (necesita window_indicator)
         6. None
@@ -75,9 +77,13 @@ class GenerateContentUseCase:
         users = self.users.get_users()
         print(users)
         series_data = self.serie_data.get_series_data(serie_id)
-        serie_info = self.last_serie_data.get_last_data(serie_id)
-        for indicator in WindowIndicatorType:
-            for user in users:
+        for user in users:
+            serie = self.factory_last_serie.create_last_serie(user_type=user)
+            serie_info = serie.get_last_data(serie_id=serie_id)
+            if not serie_info:
+                print ("No se puede generar esta gráfica para este usuario")
+                continue
+            for indicator in WindowIndicatorType:
                 create_validation = self.factory_validate_user.create_calculate_indicator(user_type=user)
                 indicator_type = create_validation.validate_user_with_indicator(indicator_type=indicator)
                 if not indicator_type:

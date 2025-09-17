@@ -2,7 +2,7 @@ from ...use_cases.dto import LastSerieDataInfo
 from modules.common.tables import TableSeriesMatch, TableSeriesData
 from ...use_cases.generate_content_use_case.interfaces import LastSerieDataInterface
 
-class LastSerieData(LastSerieDataInterface):
+class LastSerieDataSuscribed(LastSerieDataInterface):
     def get_last_data(self, serie_id:int) -> LastSerieDataInfo:
         name = None
         series = TableSeriesMatch().data

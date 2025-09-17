@@ -54,6 +54,7 @@ def main():
             -El prompt se limitara para usuarios free (solo comentarios y menos caracteres), para los demas tipos generar todo el contenido pero 
             aumentando caracteres por cada uno
             -Los usuarios tipo pro, student y suscribed se les notifica via correo la generación de este contenido
+            -Los usuarios free no puede obtener datos de unrate
     """
 
     content_generator = create_generate_content_with_indicator_use_case()

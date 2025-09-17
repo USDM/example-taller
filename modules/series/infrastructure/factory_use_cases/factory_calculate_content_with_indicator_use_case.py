@@ -1,6 +1,6 @@
 from ...use_cases.generate_content_use_case.generate_content_use_case import GenerateContentUseCase
 from ..generate_content_ia import FactoryGenerateContentIA
-from ..last_serie_data import LastSerieData
+from ..last_serie_data import FactoryLastSerie
 from ..series_repository import MemorySeriesRepository
 from ..window_indicator import FactoryWindowIndicator
 from..search_users_repo import SearchUsersRepo
@@ -9,7 +9,7 @@ from ..validate_user_repo import FactoryValidateUser
 
 
 def create_generate_content_with_indicator_use_case() -> GenerateContentUseCase:
-  last_serie_data = LastSerieData()
+  factory_last_serie = FactoryLastSerie()
   serie_data = MemorySeriesRepository()
   factory_indicator = FactoryWindowIndicator()
   users = SearchUsersRepo()
@@ -17,7 +17,7 @@ def create_generate_content_with_indicator_use_case() -> GenerateContentUseCase:
   factory_validator_user = FactoryValidateUser()
   factory_content_ia = FactoryGenerateContentIA()
   return GenerateContentUseCase(
-        last_serie_data=last_serie_data,
+        factory_last_serie=factory_last_serie,
         factory_window_inidicator=factory_indicator,
         serie_data=serie_data,
         users= users,
