@@ -5,9 +5,9 @@ from .interfaces import (
     FactoryWindowIndicator,
     SeriesRepository,
     SearchUsersInterface,
-    SendEmailInterface,
-    ValidateUserInterface,
-    FactoryGenerateContentIA
+    FactoryGenerateContentIA,
+    FactoryValidateUser,
+    FactorySendEmail
 )
 
 from ..dto import UserType, WindowIndicatorType, WindowIndicatorConfig
@@ -19,17 +19,17 @@ class GenerateContentUseCase:
             factory_window_inidicator: Optional[FactoryWindowIndicator] = None ,
             serie_data: Optional[SeriesRepository] = None,
             users: Optional[SearchUsersInterface] = None,
-            send_email: Optional[SendEmailInterface] = None,
-            validate_user: Optional[ValidateUserInterface] = None,
+            factory_send_email: Optional[FactorySendEmail] = None,
+            factory_validate_user: Optional[FactoryValidateUser] = None,
             factory_generate_content_ia: Optional[FactoryGenerateContentIA] = None
             ):
         self.last_serie_data = last_serie_data
         self.window_indicator = factory_window_inidicator
         self.serie_data = serie_data
         self.users = users
-        self.send_email = send_email
-        self.validate_user = validate_user
+        self.factory_send_email = factory_send_email
         self.factory_generate_content_ia = factory_generate_content_ia
+        self.factory_validate_user = factory_validate_user
 
     def generate_content_serie(self, serie_id:int):
         """
@@ -65,11 +65,11 @@ class GenerateContentUseCase:
         1. series_repository
         2. search_user_interface
         3. last_serie_data_interface
-        4. validate_user_interface
+        4. factory_validate_user (necesita validate_user_inteface)
         5. factory_window_inidicator (necesita window_indicator)
         6. None
         7. factory_generate_content_ia (necesita generate_content_ia)
-        8. send_email_interface
+        8. factory_send_email(necesita send_email_interface)
         """
 
         users = self.users.get_users()
@@ -78,39 +78,26 @@ class GenerateContentUseCase:
         serie_info = self.last_serie_data.get_last_data(serie_id)
         for indicator in WindowIndicatorType:
             for user in users:
-                validate_user = self.validate_user.validate_user_with_indicator(
-                    user_data=user,
-                    indicator=indicator
+                create_validation = self.factory_validate_user.create_calculate_indicator(user_type=user)
+                indicator_type = create_validation.validate_user_with_indicator(indicator_type=indicator)
+                if not indicator_type:
+                    continue
+                window_indicator = self.window_indicator.create_window_indicator(window_indicator_type=indicator_type)
+                calculate_indicator = window_indicator.calculate(
+                    series_data=series_data,
+                    window_indicator_config=WindowIndicatorConfig(period=2)
                 )
-                if validate_user:
-                    print(f"""
-                        Calculo de inidcador {indicator.value} a realizar para
-                        usuario {user.user_email} con tipo {user.user_type}
-                    """)
-                    window_indicator = self.window_indicator.create_window_indicator(
-                                                                window_indicator_type=indicator
-                                                                )
-                    calculate_indicator = window_indicator.calculate(
-                        series_data=series_data,
-                        window_indicator_config=WindowIndicatorConfig(period=2)
-                    )
-                    last_indicator_data = calculate_indicator[-1]
-                    content = self.factory_generate_content_ia.create_generate_content_ia(
-                        type_user=user
-                    )
-                    generate_content = content.generate_content_with_indicator(
-                        type_indicator=indicator,
-                        serie_info=serie_info,
-                        last_indicator_data= last_indicator_data
-                    )
-                    print(generate_content)
-                else:
-                    print(f"""
-                        Calculo de inidcador {indicator.value} NO realizado para
-                        usuario {user.user_email} con tipo {user.user_type}
-                    """)
-
-        self.send_email.send_email_to_users(users)
+                last_indicator_data = calculate_indicator[-1]
+                content = self.factory_generate_content_ia.create_generate_content_ia(type_user=user)
+                generate_content = content.generate_content_with_indicator(
+                    type_indicator=indicator,
+                    serie_info=serie_info,
+                    last_indicator_data= last_indicator_data
+                )
+                print(generate_content)
+                email = self.factory_send_email.create_send_email(user_type=user)
+                send_email = email.send_email_to_user(user_data=user)
+                print(send_email)
             
 
             
