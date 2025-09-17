@@ -150,6 +150,7 @@ class IA(ABC):
         pass
     
     def validate_messages(self, messages: List[IAMessage]) -> None:
+        print(messages, "messages", type(messages[0]))
         """
         Valida que la lista de mensajes sea correcta
         

@@ -8,7 +8,7 @@ try:
 except ImportError:
     anthropic = None
 
-from ....content_ia.use_cases.shared.base_ia import IA, IAMessage, IAResponse
+from ...use_cases.shared.base_ia import IA, IAMessage, IAResponse
 from modules.content_ia.use_cases.dto import IANames
 
 load_dotenv()
