@@ -7,7 +7,7 @@ class TableSeriesMatch:
       "description": "Unrat",
       "url": "https://www.unrated.com",
       "frequency": "monthly",
-      "importance": 4
+      "importance": 1
     },
     "UNRATED": {
       "id": 2,

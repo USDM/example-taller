@@ -47,7 +47,7 @@ class GenerateContentIndicatorUseCase:
         series_data = self.series_repository.get_series_data(serie_id)
 
         for window_indicator_type in WindowIndicatorType:
-            window_indicator = self.factory_window_indicator.create_window_indicator(window_indicator_type, user_type)
+            window_indicator = self.factory_window_indicator.create_window_indicator_with_user_type(window_indicator_type, user_type)
             window_indicator_data = window_indicator.calculate(series_data, window_indicator_config)
             if len(window_indicator_data) > 0:
                 ultimo_valor = window_indicator_data[-1]
