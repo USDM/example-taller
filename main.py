@@ -25,6 +25,7 @@ from modules.series.infrastructure.factory_use_cases import create_generate_cont
 from modules.common.tables import TableResponseIa
 
 from modules.series.use_cases.generate_content_use_case import GenerateContentUseCase
+from modules.content_ia.infrastructure.factory_use_cases import create_chat_ia_comments_use_case
 
 
 def main():
@@ -57,8 +58,22 @@ def main():
             -Los usuarios free no puede obtener datos de unrate
     """
 
-    content_generator = create_generate_content_with_indicator_use_case()
-    content_generator.generate_content_serie_with_inidicators(1)
+
+    """
+        Ejercicio 2: Consultar historial de chats y hacer resumen
+        Objetivo: De acuerdo a un arreglo de comentarios almacenados por un usuario, mostrar un resumen.
+        Reglas de negocio:
+            -Por cada tipo de usuario se tiene que hacer lo siguiente:
+                fre: solo puede consultar 5 mensajes como maximo y tendra un prompt no muy especializiado para hacer el resumen
+                suscribed: solo puede consultar 100 mensajes como maximo y tendra un prompt un poco mas especializado con respuesta en html para hacer el resumen
+                student y premium: puede consultar todos los mensaje que haya y tendra un prompt especializado cn respuesta en html con una opinion constructiva
+    """
+
+    resume_generator = create_chat_ia_comments_use_case()
+    resume_generator.generate_resume_comments(user_id=2)
+
+    # content_generator = create_generate_content_with_indicator_use_case()
+    # content_generator.generate_content_serie_with_inidicators(1)
 
     # content_generator = create_generate_content_use_case()
     # content =content_generator.generate_content_serie(1)

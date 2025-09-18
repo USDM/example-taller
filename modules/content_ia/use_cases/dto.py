@@ -63,13 +63,6 @@ class VideoContent:
           {comments_str}
       """
 
-
-
-
-
-
-
-
 @dataclass
 class ContentMetadata:
   title: str
@@ -132,16 +125,6 @@ class Content:
           {comments_str}
       """
 
-
-
-
-
-
-
-
-
-
-
 @dataclass
 class SubcontentType(Enum):
   SUMMARY = "summary"
@@ -163,6 +146,11 @@ class UserType(Enum):
   SUSCRIBED = "subscribed"
   PREMIUM = "premium"
   STUDENT = "student"
+
+@dataclass
+class Comments:
+  comments:list
+  user_id:int
 
 @dataclass
 class SourceType(Enum):

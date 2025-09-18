@@ -7,7 +7,10 @@ class TableContent:
         "title": "Test",
         "description": "Test",
       },
-      "comments": ["Este comentario es de test", "Este comentario es de test 2", "Este comentario es de test 3"],
+      "comments": ["Este comentario es de test", "Este comentario es de test 2", "Este comentario es de test 3",
+       "Este comentario es de test 4",  "Este comentario es de test 5",  "Este comentario es de test 6",  "Este comentario es de test 7",
+        "Este comentario es de test 8", "Este comentario es de test 9", "Este comentario es de test 10"
+      ],
       "summary": "Test",
       "questions": [],
       "answers": [],
