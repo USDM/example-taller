@@ -30,9 +30,9 @@ from modules.series.infrastructure.factory_use_cases import create_generate_cont
 
 def main():
 
-    generate_content_indicator_use_case = create_generate_content_indicator_use_case()
-    content = generate_content_indicator_use_case.generate_content_indicator(1)
-    print(content, "content")
+    # generate_content_indicator_use_case = create_generate_content_indicator_use_case()
+    # content = generate_content_indicator_use_case.generate_content_indicator(1)
+    # print(content, "content")
     
 
     # content_generator = create_generate_content_use_case()
@@ -41,9 +41,9 @@ def main():
     # print(content)
 
 
-    # chat_ia_use_case = create_chat_ia_use_case()
-    # for pasda in [1,2,3]:
-    #     chat_ia_use_case.chatWithContentIa(1, "que comentarios te mande?")
+    chat_ia_use_case = create_chat_ia_use_case()
+    for pasda in [1,2,3]:
+        chat_ia_use_case.chatWithContentIa(1, "que comentarios te mande?", 2)
     # print(TableResponseIa().data)
 
     # email_use_case = create_send_email_use_case()

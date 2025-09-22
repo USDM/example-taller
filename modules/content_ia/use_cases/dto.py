@@ -193,6 +193,7 @@ class PlanConfig:
   ia_names: list[IANames]
   send_email: bool
   analyze_apis: bool
+  max_messages: int
 
   def __str__(self):
     return f"""

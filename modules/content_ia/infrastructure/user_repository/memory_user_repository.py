@@ -14,5 +14,6 @@ class MemoryUserRepository(UserRepository):
     return PlanConfig(
       ia_names=[IANames(ia_name) for ia_name in result["ia_names"]],
       send_email=result["send_email"],
-      analyze_apis=result["analyze_apis"]
+      analyze_apis=result["analyze_apis"],
+      max_messages=result["max_messages"]
     )
