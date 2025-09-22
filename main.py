@@ -20,9 +20,11 @@ from modules.content_ia.infrastructure.factory_use_cases import create_chat_ia_u
 from modules.content_ia.use_cases.emails_use_case import EmailsUseCase
 
 from modules.content_ia.infrastructure.factory_use_cases import create_send_email_use_case
-from modules.series.infrastructure.factory_use_cases import create_generate_content_use_case, create_generate_content_indicator_use_case
+from modules.series.infrastructure.factory_use_cases import create_generate_content_indicator_use_case
+from modules.content_ia.infrastructure.factory_use_cases import create_generate_content_use_case
 
 from modules.common.tables import TableResponseIa
+from modules.content_ia.infrastructure.factory_use_cases import create_summary_use_case
 
 def main():
 
@@ -30,20 +32,27 @@ def main():
     # content = content_generator.generate_content_serie(1, 2)
     # print(content)
 
+    # user_type = UserType.FREE
+
+    # summary_use_case = create_summary_use_case()
+    # summary, history = summary_use_case.generate_summary(user_type)
+    # print(history)
+    # print(summary)
+
     # chat_ia_use_case = create_chat_ia_use_case()
-    # for pasda in [1,2,3]:
-    #     chat_ia_use_case.chatWithContentIa(1, "que comentarios te mande?")
+    # chat_ia_use_case.chatWithContentIa(1, "que comentarios te mande?", user_type)
     # print(TableResponseIa().data)
 
     # email_use_case = create_send_email_use_case()
     # email_use_case.send_email(1)
 
-    # video_url = "https://www.youtube.com/watch?v=aa_GIiivHTw"
-    # source_path = "media/test.pdf"
-    # tweet_path = "media/fake_1.PNG"
-    # user_id = 4
-    # content_service = create_generate_content_use_case()
-    # content_service.process_content(tweet_path, user_id, SourceType.TWEET)
+    video_url = "https://www.youtube.com/watch?v=aa_GIiivHTw"
+    source_path = "media/test.pdf"
+    tweet_path = "media/fake_1.PNG"
+    user_id = 4
+    content_service = create_generate_content_use_case()
+    content_service.process_content(tweet_path, user_id, SourceType.TWEET)
+    content_service.process_content(source_path, user_id, SourceType.PDF)
 
     # series_service = create_series_service()
     # series_service.search_match_series("APP", SourceName.GOOGLE, 3)
@@ -55,12 +64,12 @@ def main():
     # calculate_indicator_use_case = create_calculate_indicator_use_case()
     # calculate_indicator_use_case.calculate_window_indicator(1, window_indicator_type, window_indicator_config, user_type)
 
-    user_type = UserType.FREE
+    # user_type = UserType.FREE
 
-    generate_content_indicator_use_case = create_generate_content_indicator_use_case()
-    content_indicator_info, message = generate_content_indicator_use_case.generate_content_indicator(1, user_type)
-    print(content_indicator_info)
-    print(message)
+    # generate_content_indicator_use_case = create_generate_content_indicator_use_case()
+    # content_indicator_info, message = generate_content_indicator_use_case.generate_content_indicator(1, user_type)
+    # print(content_indicator_info)
+    # print(message)
 
 
 if __name__ == "__main__":

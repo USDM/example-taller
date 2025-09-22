@@ -12,15 +12,34 @@ class GenerateContentUseCase:
   ):
     self.factory_creator_user_content = factory_creator_user_content
     self.factory_user_repository = factory_user_repository
+    self._user_cache = {}
 
   def process_content(self, source_path:str, user_id:int, source_type:SourceType) -> Content:
     all_results = []
 
     user_repository = self.factory_user_repository.create_using_mode(os.getenv("MODE"))
 
-    user_type = user_repository.get_user_type(user_id)
+    # Initialize variables
+    user_type = None
+    user_email = None
+
+    if user_id in self._user_cache:
+      print(f"Datos del usuario {user_id} obtenidos desde memoria caché")
+      user_type = self._user_cache[user_id].get('user_type')
+      user_email = self._user_cache[user_id].get('user_email')
+
+      print("user_cache", self._user_cache)
+
+      return True
+
+    if not user_type:
+      user_type = user_repository.get_user_type(user_id)
+      if user_id not in self._user_cache:
+        self._user_cache[user_id] = {}
+      self._user_cache[user_id]['user_type'] = user_type
+
     plan_config = user_repository.get_user_type_plan_config(user_type)
-  
+
     factory_user_content = self.factory_creator_user_content.create(user_type)
 
     content_generator = factory_user_content.create_content_generator(source_type) # PDF
@@ -32,7 +51,15 @@ class GenerateContentUseCase:
     notifier = instances_plan_config.notifier
     all_ias = instances_plan_config.ias
 
-    user_email = content_repository.get_user_email(user_id)
+    if not user_email:
+      user_email = content_repository.get_user_email(user_id)
+      if user_id not in self._user_cache:
+        self._user_cache[user_id] = {}
+      self._user_cache[user_id]['user_email'] = user_email
+
+    print("saved user in cache", self._user_cache)
+
+    return True
 
     for ia in all_ias:
       try:
