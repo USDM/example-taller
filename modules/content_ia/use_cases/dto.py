@@ -202,3 +202,21 @@ class PlanConfig:
         Send Email: {self.send_email}
         Analyze APIs: {self.analyze_apis}
       """
+
+
+@dataclass
+class ChatContentResponse:
+  id: int
+  questions: str
+  answers: str
+
+@dataclass
+class ChatContent:
+  chat_id: int
+  chat_content_response: list[ChatContentResponse]
+  def __str__(self):
+    return f"""
+      ChatContent:
+        Chat ID: {self.chat_id}
+        Chat Content Response: {self.chat_content_response}
+      """

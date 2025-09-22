@@ -26,6 +26,8 @@ from modules.common.tables import TableResponseIa
 
 from modules.series.infrastructure.factory_use_cases import create_generate_content_indicator_use_case
 
+from modules.content_ia.infrastructure.factory_use_cases import create_summary_use_case
+
 
 
 def main():
@@ -40,10 +42,13 @@ def main():
 
     # print(content)
 
+    summary_use_case = create_summary_use_case()
+    summary_use_case.get_summary(1, 3)
 
-    chat_ia_use_case = create_chat_ia_use_case()
-    for pasda in [1,2,3]:
-        chat_ia_use_case.chatWithContentIa(1, "que comentarios te mande?", 2)
+
+    # chat_ia_use_case = create_chat_ia_use_case()
+    # for pasda in [1,2,3]:
+    #     chat_ia_use_case.chatWithContentIa(1, "que comentarios te mande?", 2)
     # print(TableResponseIa().data)
 
     # email_use_case = create_send_email_use_case()
